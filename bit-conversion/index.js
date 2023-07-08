@@ -6,18 +6,16 @@ const check = (original, count, val, res) => {
     if(original % 2) {
         let print = `${original} = ${count}`
         val.value = ''
-        console.log(print)
         return res.innerText = print
     } else {
         let print = `${original} = ${count.split('').reverse().join('')}`
         val.value = ''
-        console.log(print)
         return res.innerText = print
     }
 }
 
 const toBit = (val, res) => {
-        let original = parseFloat(val.value); console.log(original)
+        let original = parseFloat(val.value);
         let decimal = parseFloat(val.value)
         let count = '';
         if(decimal > 0) {
@@ -25,16 +23,12 @@ const toBit = (val, res) => {
                 if (decimal % 2) {
                     count += '1'
                     decimal = (Math.round(decimal) - 1)
-                    console.log(count)
                 } else if(decimal === 1) {
                     count += '1'
-                    console.log(count)
                 } else {
                     count += '0'
-                    console.log(count)
                 }
                 decimal /= 2;
-                console.log(decimal); console.log(original)
                 if (decimal < 1) {
                     check(original, count, val, res)
                 }
