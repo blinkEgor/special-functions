@@ -3,15 +3,9 @@ const decimalInput = document.getElementById('decimal')
 const resultP = document.getElementById('result')
 
 const check = (original, count, val, res) => {
-    if(original % 2) {
-        let print = `${original} = ${count}`
-        val.value = ''
-        return res.innerText = print
-    } else {
-        let print = `${original} = ${count.split('').reverse().join('')}`
-        val.value = ''
-        return res.innerText = print
-    }
+    let print = `${original} = ${count.split('').reverse().join('')}`
+    val.value = ''
+    return res.innerText = print
 }
 
 const toBit = (val, res) => {
