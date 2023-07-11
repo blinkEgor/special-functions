@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // for example: 
+        // it was = [2, 5, 9, 30, 20, 10]
+        // has become = [2, 9, 30, 20, 10]
+
+        (function(del) {
+            const arr = [2, 5, 9, 30, 20, 10];
+            console.log(arr);
+            [arr[del], arr[arr.length - 1]] = [arr[arr.length - 1], arr[del]];
+            arr.pop();
+            for(let i = 0; i < arr.length - (del + 1); i++) {
+                [arr[i + del], arr[i + (del + 1)]] = [arr[i + (del +1)], arr[i + del]];
+            }
+            console.log(arr);
+        })(1);
+
+    </script>
+</body>
+</html>
