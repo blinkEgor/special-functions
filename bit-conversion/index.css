@@ -37,4 +37,5 @@ p {
     border-radius: 15px;
     text-align: center;
     margin: 10px;
+    word-break: break-all;
 }
