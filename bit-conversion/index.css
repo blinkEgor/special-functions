@@ -10,25 +10,28 @@ section {
     margin: 10px;
 }
 
-.input-box {
-    border: solid 20px mediumseagreen;
+div.input-box {
+    background-color: mediumseagreen;
     border-radius: 15px;
     width: 200px;
     display: flex;
-    margin: 10px;
+    margin: 5px;
+    padding: 15px 20px 15px 20px;
 }
 input {
     flex-basis: 100%;
     border: none;
-    margin: 10px;
+    padding: 15px;
     outline-width: 0;
+    border-radius: 10px;
 }
 button {
     border: none;
     padding: 20px;
     border-radius: 15px;
     background-color: darkgrey;
-    margin: 10px;
+    margin: 5px;
+    width: 200px;
 }
 p {
     width: 200px;
@@ -36,6 +39,6 @@ p {
     border: solid 20px moccasin;
     border-radius: 15px;
     text-align: center;
-    margin: 10px;
+    margin: 5px;
     word-break: break-all;
 }
