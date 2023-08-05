@@ -1,3 +1,21 @@
+const aniPlace = (dec, bit) => {
+    let countDec = "";
+    let constBit = "";
+    dec.placeholder = countDec;
+    bit.placeholder = constBit;
+    for(let i = 0; i < 6; i++) {
+        const ani = () => {
+            countDec += i;
+            dec.placeholder = countDec;
+            if(!(i % 2)) { constBit += "1" }
+            else { constBit += "0" }
+            bit.placeholder = constBit;
+        }
+        setTimeout(ani, 1000 * i);
+    }
+};
+aniPlace(document.getElementById("decimal"), document.getElementById("bit"));
+
 const check = (original, count, val, res) => {
     let print = `${original} = ${count.split('').reverse().join('')}`;
     val.value = '';
