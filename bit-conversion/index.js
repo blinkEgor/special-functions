@@ -1,33 +1,39 @@
 const check = (original, count, val, res) => {
-    let print = `${original} = ${count.split('').reverse().join('')}`
-    val.value = ''
-    return res.innerText = print
+    let print = `${original} = ${count.split('').reverse().join('')}`;
+    val.value = '';
+    if(count.length == 0) {
+        return res.innerText = "No value or Invalid input";
+    }
+    return res.innerText = print;
 };
 
 const toBit = (val, res) => {
         let original = parseFloat(val.value);
-        let decimal = parseFloat(val.value)
+        let decimal = parseFloat(val.value);
         let count = '';
-        if(decimal > 0) {
+        if(original > 0) {
             for(let i = 0; i < val.value; i++) {
                 if (decimal % 2) {
-                    count += '1'
-                    decimal = (Math.round(decimal) - 1)
+                    count += '1';
+                    decimal = (Math.round(decimal) - 1);
                 } else if(decimal === 1) {
-                    count += '1'
+                    count += '1';
                 } else {
-                    count += '0'
+                    count += '0';
                 }
                 decimal /= 2;
                 if (decimal < 1) {
-                    check(original, count, val, res)
+                    check(original, count, val, res);
                 }
             }
+        } else if(original == 0) {
+            count = '0';
+            check(original, count, val, res);
         } else {
-            count = '0'
-            check(original, count, val, res)    
+            val.value = '';
+            return res.innerText = "No value or Invalid input";
         }
-        check(original, count, val, res)
+        check(original, count, val, res);
 };
 
 const toDecimal = (val, res) => {
@@ -38,6 +44,11 @@ const toDecimal = (val, res) => {
         for(let i = 0; i < original.length; i++) {
             if(bit[i] === '1') {
                 count += (2**i);
+            } else if(bit[i] === '0') {
+                count += 0;
+            } else {
+                val.value = '';
+                return res.innerText = "Invalid input";
             }
         }
     } else {
@@ -55,4 +66,4 @@ document.getElementById('convert-to-bit').addEventListener("click", () => toBit(
 document.getElementById('convert-to-decimal').addEventListener("click", () => toDecimal(
     document.getElementById('bit'),
     document.getElementById('result-decimal')
-))
+));
