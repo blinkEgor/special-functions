@@ -1,20 +1,41 @@
-const aniPlace = (dec, bit) => {
-    let countDec = "";
-    let constBit = "";
-    dec.placeholder = countDec;
-    bit.placeholder = constBit;
-    for(let i = 0; i < 6; i++) {
-        const ani = () => {
-            countDec += i;
-            dec.placeholder = countDec;
-            if(!(i % 2)) { constBit += "1" }
-            else { constBit += "0" }
-            bit.placeholder = constBit;
+(() => {
+    const count = (() => {
+        let num = 0;
+        return (() => num++ );
+    })();
+    const countDown = () => {
+        const info = document.getElementById('decimal');
+        let timerId = null, num = count();
+        if(num < 7) {
+            info.placeholder += num;
+            timerId = window.setTimeout(countDown, 1000);
+        } else {
+            info.placeholder = '';
+            window.clearTimeout(timerId);
         }
-        setTimeout(ani, 1000 * i);
     }
-};
-aniPlace(document.getElementById("decimal"), document.getElementById("bit"));
+    countDown();
+})();
+
+(() => {
+    const count = (() => {
+        let num = 0;
+        return (() => num++ );
+    })();
+    const countDown = () => {
+        const info = document.getElementById('bit');
+        let timerId = null, num = count();
+        if(num < 7) {
+            if(!(num % 2)) { info.placeholder += '1' }
+            else { info.placeholder += '0' }
+            timerId = window.setTimeout(countDown, 1000);
+        } else {
+            info.placeholder = '';
+            window.clearTimeout(timerId);
+        }
+    }
+    countDown();
+})();
 
 const check = (original, count, val, res) => {
     let print = `${original} = ${count.split('').reverse().join('')}`;
