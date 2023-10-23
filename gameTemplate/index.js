@@ -56,3 +56,59 @@ const berserk = new class BerserkEffect extends Effect {
         return -0.5;
     }
 }();
+
+// ________________________________________________________
+
+class Item {
+    constructor(name) {
+        this.name = name;
+    }
+    get_name() {
+        return this.name;
+    }
+}
+
+class Weapon extends Item {
+    constructor(name, damage, effect) {
+        super(name);
+        this.damage = damage;
+        this.effect = effect;
+    }
+    get_damage() {
+        return this.damage;
+    }
+    get_effect() {
+        return this.effect;
+    }
+}
+
+class Shield extends Item {
+    constructor(name, armor) {
+        super(name);
+        this.armor = armor;
+    }
+    get_shield() {
+        return this.armor;
+    }
+}
+
+class Potion extends Item {
+    constructor(name, effect) {
+        super(name);
+        this.effect = effect;
+    }
+    get_effect() {
+        return this.effect;
+    }
+}
+
+class HealPotion extends Potion {
+    constructor(name, heal_count) {
+        super(name, new RegeneartionEffect(name, 1, heal_count));
+    }
+}
+class RegeneartionPotion extends Potion {
+    constructor(name, steps, heal_count) {
+        super(name, new RegeneartionEffect(name, steps, heal_count));
+    }
+}
