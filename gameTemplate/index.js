@@ -55,4 +55,4 @@ const berserk = new class BerserkEffect extends Effect {
     get_resistance() {
         return -0.5;
     }
-}
+}();
