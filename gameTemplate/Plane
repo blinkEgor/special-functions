@@ -1,0 +1,13 @@
+* Plans
+______________________________________________________________________
+
+add a class that will handle game events, GameState class
+
+add the class responsible for creating the player and mob, 
+the Entity class
+
+add inventory class
+
+add item class
+
+add the actual effect
