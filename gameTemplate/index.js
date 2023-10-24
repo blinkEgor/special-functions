@@ -112,3 +112,34 @@ class RegeneartionPotion extends Potion {
         super(name, new RegeneartionEffect(name, steps, heal_count));
     }
 }
+
+// ________________________________________________________
+
+class Inventory {
+    constructor(container_size = 16) {
+        this.container_size = container_size;
+        this.container = Array();
+    }
+    set_item(idx, item) {
+        /*
+            idx - число
+            item - объект от класса Item
+        */
+        if(!(item instanceof Item)) {
+            throw new Error("item isn't instance of Item");
+        }
+        if(idx < 0 || idx > this.container_size) {
+            throw new Error("idx out of bounds");
+        }
+        this.container[idx] = item;
+    }
+    get_item(idx) {
+        /*
+            idx - число
+        */
+        if(idx < 0 || idx > this.container_size) {
+            throw new Error("idx out of bounds");
+        }
+        return this.container[idx];
+    }
+}
