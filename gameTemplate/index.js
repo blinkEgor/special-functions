@@ -268,3 +268,77 @@ class Entity {
         }
     }
 }
+
+// _____________________________________________________________
+
+class Game {
+    entities = Array();
+    step_idx = -1;
+    player_idx = -1;
+    entities_count = 0;
+    ally_idxes = Array();
+    enemy_idxes = Array();
+
+    constructor(allies_count, enemies_count) {
+        this.entities_count = allies_count + enemies_count;
+        this.step_idx = 0;
+        this.player_idx = 0;
+
+        for(let i = 0; i < this.entities_count; i++) {
+            if(i < allies_count) {
+                this.ally_idxes[this.ally_idxes.length] = i;
+            } else if(i > allies_count && i < allies_count + enemies_count) {
+                this.enemy_idxes[this.enemy_idxes.length] = i;
+            }
+        }
+    }
+
+    step(action, target_id = -1) {
+        const entity = this.entities[this.step_idx];
+        let target;
+        if(target_id >= 0) {
+            target = this.entities[target_id];
+        } else {
+            let lowest_health;
+            let t_idx = -1;
+            if(this.ally_idxes.includes(this.step_idx)) {
+                lowest_health = this.entities[this.enemy_idxes[0]].health;
+                for(let i = 1; i < this.enemy_idxes.length; i++) {
+                    if(this.entities[this.enemy_idxes[i]].is_alive() && 
+                       this.entities[this.enemy_idxes[i]].health < lowest_health) {
+                        lowest_health = this.entities[this.enemy_idxes[i]].health;
+                        t_idx = this.enemy_idxes[i];
+                    }
+                }
+            } else if(this.enemy_idxes.includes(this.step_idx)) {
+                lowest_health = this.entities[this.ally_idxes[0]].length;
+                for(let i = 1; i < this.ally_idxes.length; i++) {
+                    if(this.get_entity(this.ally_indexes[i]).is_alive() &&
+                       this.get_entity(this.ally_indexes[i]).health < lowest_health) {
+                        lowest_health = this.get_entity(this.ally_indexes[i]).health;
+                        t_idx = this.ally_indexes[i];
+                    }
+                }
+            }
+            target = this.entities[t_idx];
+        }
+        if(action === 0) {
+            entity.deal_damage(target, entity.get_weapon());
+        } else if(action === 1) {
+            entity.setup_shield(entity.get_weapon().get_armor(), entity.get_weapon());
+        }
+        entity.step();
+        this.step_count(entity);
+    }
+
+    step_count(entity) {
+        entity.steps -= 1;
+        if(entity.steps <= 0) {
+            entity.steps = entity.max_steps;
+            this.step_idx += 1;
+            if (this.step_idx >= this.entities_count) {
+                this.step_idx = 0;
+            }
+        }
+    }
+}
